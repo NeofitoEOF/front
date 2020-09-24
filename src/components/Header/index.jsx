@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
-import {Menu} from '@material-ui/icons';
+import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
 
-
-export const Header = () => {
+export const Header = ({ title, callback }) => {
   return (
     <AppBar>
       <Toolbar>
-        <IconButton color="inherit">
+        <IconButton onClick={() => callback()} color="inherit">
           <Menu />
         </IconButton>
+        <Typography variant="h6">{title}</Typography>
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
