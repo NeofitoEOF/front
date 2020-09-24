@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <AppBar>
       <Toolbar>
-        <IconButton>
+        <IconButton color="inherit">
           <Menu />
         </IconButton>
       </Toolbar>

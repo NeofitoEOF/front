@@ -15,11 +15,10 @@ function App() {
       <Header />
       <Router>
         <Switch>
-          <Route exact path={"/"} component={CadastroCliente} />
-          <Route path={"/cadastrarDeposito"} component={CadastrarDeposito} />
-          <Route path={"/cadastrobancoCorretora"} component={CadastroCorretora} />
-          <Route path={"/cadastrarTransacao"} component={CadastrarTransacao} />
-
+          <Route exact path={"/cliente/cadastrar"} component={CadastroCliente} />
+          <Route path={"/deposito/cadastrar"} component={CadastrarDeposito} />
+          <Route path={"/corretora/cadastrar"} component={CadastroCorretora} />
+          <Route path={"/transacao/cadastrar"} component={CadastrarTransacao} />
         </Switch>
       </Router>
     </>
