@@ -6,12 +6,20 @@
  import MenuItem from '@material-ui/core/MenuItem';
  import InputLabel from '@material-ui/core/InputLabel';
  import axios from 'axios';
-
+ 
  export const CadastroCliente = () => {
-    const { register, handleSubmit, reset } = useForm();
-   const onSubmit = async (inputs) => {
-     console.log(inputs)
-     axios.post("https://api-invest-crud.herokuapp.com/cadastrarclientes/json", { inputs })
+  const [prospect, setProspect] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const { register, handleSubmit, reset } = useForm();
+    const onSubmit = async (inputs) => {
+     if(prospect === 1)
+      inputs['prospect'] = "Cliente"
+     else if(prospect === 2)
+      inputs['prospect'] = "Cliente em Potencial"
+
+      console.log(inputs)
+
+     axios.post("https://api-invest-crud.herokuapp.com/cadastrarclientes/json", inputs )
      .then(res => {
          alert("Cadastro realizado");
      })
@@ -25,11 +33,9 @@
    //   .then(response => response.text())
    //   .then(result => console.log(result))
    //   .catch(error => console.log('error', error));
-   const [age, setAge] = React.useState('');
-   const [open, setOpen] = React.useState(false);
 
    const handleChange = (event) => {
-     setAge(event.target.value);
+     setProspect(event.target.value);
    };
 
    const handleClose = () => {
@@ -52,20 +58,20 @@
            <TextField style={{ marginBottom: "1rem" }} name="email" variant="outlined" label="E-mail" inputRef={register} />
            <TextField style={{ marginBottom: "1rem" }} name="endereco" variant="outlined" label="Endereço" inputRef={register} />
            <InputLabel id="demo-controlled-open-select-label">Cliente & Possivel Cliente</InputLabel>
-           <Select name="prospect" Ref={register}
+           <Select name="prospect"
              labelId="demo-controlled-open-select-label"
              id="demo-controlled-open-select"
              open={open}
              onClose={handleClose}
              onOpen={handleOpen}
-             value={age}
+             value={prospect}
              onChange={handleChange}
            >
-             <MenuItem value="">
+             <MenuItem value={0}>
                <em></em>
              </MenuItem>
-             <MenuItem value={10}>Cliente</MenuItem>
-             <MenuItem value={20}>Possível Cliente</MenuItem>
+             <MenuItem value={1}>Cliente</MenuItem>
+             <MenuItem value={2}>Possível Cliente</MenuItem>
 
            </Select>
 
