@@ -10,7 +10,7 @@ export const  CadastrarDeposito = () => {
     }
     return (
         <div>
-            <h1>Cadastrar Depósitos e Resgates</h1>
+            <h1 style={{ margin: "auto" }}>Cadastrar Depósitos e Resgates</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 >

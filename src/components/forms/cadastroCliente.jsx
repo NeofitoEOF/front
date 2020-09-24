@@ -1,54 +1,82 @@
-import React from 'react'
-import { useForm } from "react-hook-form";
-// import Button from '@material-ui/core/Button';
+ import React from 'react'
+ import { useForm } from "react-hook-form";
+ import { Button } from '@material-ui/core';
+ import TextField from '@material-ui/core/TextField';
+ import Select from '@material-ui/core/Select';
+ import MenuItem from '@material-ui/core/MenuItem';
+ import InputLabel from '@material-ui/core/InputLabel';
+ import axios from 'axios';
 
-export const  CadastroCliente = () => {
+ export const CadastroCliente = () => {
     const { register, handleSubmit, reset } = useForm();
-    const onSubmit = async (inputs) => {
-        console.log(inputs)
-        reset();
-    }
+   const onSubmit = async (inputs) => {
+     console.log(inputs)
+     axios.post("https://api-invest-crud.herokuapp.com/cadastrarclientes/json", { inputs })
+     .then(res => {
+         alert("Cadastro realizado");
+     })
+     .catch(error => {
+         alert("Houve um erro ao cadastrar");
+     });
+     reset();
+   };
 
-var axios = require('axios');
+   // fetch("https://api-invest-crud.herokuapp.com/mostrarativos/")
+   //   .then(response => response.text())
+   //   .then(result => console.log(result))
+   //   .catch(error => console.log('error', error));
+   const [age, setAge] = React.useState('');
+   const [open, setOpen] = React.useState(false);
 
-var config = {
-  method: 'get',
-  url: 'https://api-invest-crud.herokuapp.com/depositos/',
-  headers: { }
-};
+   const handleChange = (event) => {
+     setAge(event.target.value);
+   };
 
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+   const handleClose = () => {
+     setOpen(false);
+   };
 
-    
-    return (
-        <div>
-            <h1>Cadastrar Cliente</h1>
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                >
-                <input name="Nome" placeholder="Nome" ref={register} />
-                <input name="CPF" placeholder="CPF" ref={register} />
-                <input name="Telefone" placeholder="Telefone" ref={register} />
-                <input name="Endereço" placeholder="Endereço" ref={register} />
-                <input type="email" name="email" placeholder="E-mail"  ref={register}/>
-                <label> Propost</label>
-                <select>
-                    <option value=""></option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="Possível Cliente"> Possível Cliente</option> 
-                </select>
-                <button type="submit" >Cadastrar Cliente</button>
-                {/* <Button tpye="submit" color="primary">
-                    Primary
-                </Button> */}
-            </form>
-        </div>
-    )
-}
+   const handleOpen = () => {
+     setOpen(true);
+   };
+   return (
+     <>
+       <div style={{ display: "flex", flexDirection: "column", paddingTop: "96px" }}>
+         <h1 style={{ margin: "auto" }}>Cadastrar Cliente</h1>
+         <form
+           style={{ display: "flex", flexDirection: "column", Width: 1 }} onSubmit={handleSubmit(onSubmit)}
+         >
+           <TextField style={{ marginBottom: "1rem" }} name="nome" variant="outlined" label="Nome" inputRef={register} />
+           <TextField style={{ marginBottom: "1rem" }} name="cpf" variant="outlined" label="CPF" inputRef={register} />
+           <TextField style={{ marginBottom: "1rem" }} name="telefone" variant="outlined" label="Telefone" inputRef={register} />
+           <TextField style={{ marginBottom: "1rem" }} name="email" variant="outlined" label="E-mail" inputRef={register} />
+           <TextField style={{ marginBottom: "1rem" }} name="endereco" variant="outlined" label="Endereço" inputRef={register} />
+           <InputLabel id="demo-controlled-open-select-label">Cliente & Possivel Cliente</InputLabel>
+           <Select name="prospect" Ref={register}
+             labelId="demo-controlled-open-select-label"
+             id="demo-controlled-open-select"
+             open={open}
+             onClose={handleClose}
+             onOpen={handleOpen}
+             value={age}
+             onChange={handleChange}
+           >
+             <MenuItem value="">
+               <em></em>
+             </MenuItem>
+             <MenuItem value={10}>Cliente</MenuItem>
+             <MenuItem value={20}>Possível Cliente</MenuItem>
 
+           </Select>
+
+           {/* <button type="submit" ></button> */}
+           <Button style={{ marginBottom: "1rem" }} variant="contained" color="primary" type="submit" >Cadastrar Cliente</Button>
+           {/* <Button tpye="submit" color="primary">
+                     Primary
+                 </Button> */}
+
+         </form>
+       </div>
+     </>
+   )
+ }
