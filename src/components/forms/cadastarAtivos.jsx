@@ -33,25 +33,20 @@ export const CadastrarAtivo = () => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (inputs) => {
-    await axios
-      .post("https://api-invest-crud.herokuapp.com/cadastrarativos/json", {
+    await axios.post(
+      "https://api-invest-crud.herokuapp.com/cadastrarativos/json",
+      {
         excecao: select1Value,
         ativ_input: select1Value,
         ...inputs,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    );
 
     reset();
   };
 
   return (
     <Container style={{ paddingTop: "96px" }}>
-      <Typography variant="h4">Cadastrar Ativo</Typography>
       <form
         style={{
           display: "grid",

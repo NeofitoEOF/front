@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import * as axios from "axios";
 import styled from "styled-components";
+import { useDataContext } from "../context/ContextProvider";
 
 const EmptyValue = styled.div`
   height: 1.5rem;
@@ -18,69 +19,53 @@ const EmptyValue = styled.div`
 
 export const CadastrarDeposito = () => {
   const [select1, setSelect1] = useState(false);
-  const [select2, setSelect2] = useState(false);
-  const [select3, setSelect3] = useState(false);
-  const [select4, setSelect4] = useState(false);
-
   const [select1Value, setSelect1Value] = useState();
+
+  const [select2, setSelect2] = useState(false);
   const [select2Value, setSelect2Value] = useState();
-  const [select3Value, setSelect3Value] = useState();
-  const [select4Value, setSelect4Value] = useState();
 
-  const [clients, setClient] = useState([]);
+  const { data } = useDataContext();
 
-// Buscar clientes
+  const clientes = data.clientes.map((item) => {
+    return {
+      label: item.nome,
+      value: item.nome,
+    };
+  });
 
-  (async () => {
-    if (clients.length === 0) {
-      await axios
-        .get("https://api-invest-crud.herokuapp.com/clientes/")
-        .then((res) => {
-          const retornar = res.data.clientes.map((item) => {
-            return { value: item.nome, label: item.nome };
-          });
-          if (clients.length !== retornar.length) {
-            setClient(retornar);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  })();
+  const bancosDoCliente = data.bancos.filter((item) => {
+    return item.cliente === select1Value;
+  });
 
-  const [ativosData, setAtivosData] = useState([]);
-  const [ativos, setAtivos] = useState([]);
-
-  (async () => {
-    if (ativos.length === 0) {
-      await axios
-        .get("https://api-invest-crud.herokuapp.com/mostrarativos/")
-        .then((res) => {
-          setAtivosData(res.data.ativos);
-          const retornar = res.data.ativos.map((item) => {
-            return { value: item.nome_ativo, label: item.nome_ativo };
-          });
-          if (ativos.length !== retornar.length) {
-            setAtivos(retornar);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  })();
+  const bancos = bancosDoCliente.map((item) => {
+    return {
+      value: item.banco_numero,
+      label: item.banco_nome,
+    };
+  });
 
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (inputs) => {
-    console.log(inputs);
+    const today = new Date();
+
+    const date = `${today.getFullYear()}-${today.getMonth()}-${today.getDay()}`;
+
+    await axios.post(
+      "https://api-invest-crud.herokuapp.com/cadastrardepositos/json",
+      {
+        data: date,
+        banco_id: select2Value,
+        cliente: select1Value,
+        ...inputs,
+      }
+    );
+
     reset();
   };
 
   return (
     <Container style={{ paddingTop: "96px" }}>
-      <Typography variant="h4">Cadastrar Depósitos e Resgates</Typography>
       <form
         style={{
           display: "grid",
@@ -99,12 +84,13 @@ export const CadastrarDeposito = () => {
             labelId="demo-controlled-open-select-label"
             id="demo-controlled-open-select"
             open={select1}
+            variant="outlined"
             onClose={() => setSelect1(false)}
             onOpen={() => setSelect1(true)}
             value={select1Value}
             onChange={(e) => setSelect1Value(e.target.value)}
           >
-            {clients.map((item, index) => {
+            {clientes.map((item, index) => {
               return (
                 <MenuItem key={index} value={item.value}>
                   {item.label}
@@ -113,28 +99,39 @@ export const CadastrarDeposito = () => {
             })}
           </Select>
         </div>
-     
-        <TextField
-          style={{ marginBottom: "1rem" }}
-          type="datetime-local"
-          variant="outlined"
-          name="data"
-          inputRef={register}
-        />
-        <TextField
-          style={{ marginBottom: "1rem" }}
-          variant="outlined"
-          name="data"
-          label="Banco"
-          inputRef={register}
-        />
 
-          <TextField
+        <div>
+          <InputLabel id="demo-controlled-open-select-label">
+            Banco do Cliente
+          </InputLabel>
+          <Select
+            style={{ width: "100%" }}
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={select2}
+            variant="outlined"
+            onClose={() => setSelect2(false)}
+            onOpen={() => setSelect2(true)}
+            value={select2Value}
+            onChange={(e) => setSelect2Value(e.target.value)}
+          >
+            {bancos.map((item, index) => {
+              return (
+                <MenuItem key={index} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </div>
+
+        <TextField
           style={{ marginBottom: "1rem" }}
           variant="outlined"
-          name="data"
+          name="deposito_resgate"
           label="R$: Deposito ou Resgate"
           inputRef={register}
+          type="number"
         />
         <Button variant="contained" color="primary" type="submit">
           Cadastrar Transação

@@ -44,7 +44,6 @@ export const CadastroCliente = () => {
   return (
     <>
       <Container style={{ paddingTop: "96px" }}>
-        <Typography variant="h4">Cadastrar Cliente</Typography>
         <form
           style={{ display: "grid", gridColumn: 1, gridGap: "1rem", marginTop: "2rem" }}
           onSubmit={handleSubmit(onSubmit)}

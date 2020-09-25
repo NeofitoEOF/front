@@ -8,19 +8,22 @@ import {
   BrowserRouter as Router, Switch, Route
 } from "react-router-dom";
 import { Navigator } from "./components/layout"
+import { DataContextProvider } from "./components/context/ContextProvider"
 
 function App() {
   return (
     <>
       <Router>
         <Navigator />
-        <Switch>
-          <Route exact path={"/ativo/cadastrar"} component={CadastrarAtivo} />
-          <Route exact path={"/cliente/cadastrar"} component={CadastroCliente} />
-          <Route path={"/deposito/cadastrar"} component={CadastrarDeposito} />
-          <Route path={"/corretora/cadastrar"} component={CadastroCorretora} />
-          <Route path={"/transacao/cadastrar"} component={CadastrarTransacao} />
-        </Switch>
+        <DataContextProvider>
+          <Switch>
+            <Route exact path={"/ativo/cadastrar"} component={CadastrarAtivo} />
+            <Route exact path={"/cliente/cadastrar"} component={CadastroCliente} />
+            <Route path={"/deposito/cadastrar"} component={CadastrarDeposito} />
+            <Route path={"/corretora/cadastrar"} component={CadastroCorretora} />
+            <Route path={"/transacao/cadastrar"} component={CadastrarTransacao} />
+          </Switch>
+        </DataContextProvider>
       </Router>
     </>
   );

@@ -10,7 +10,9 @@ import {
   TextField,
 } from "@material-ui/core";
 import * as axios from "axios";
+import InputMask from "react-input-mask";
 import styled from "styled-components";
+import { useDataContext } from "../context/ContextProvider";
 
 const EmptyValue = styled.div`
   height: 1.5rem;
@@ -19,62 +21,50 @@ const EmptyValue = styled.div`
 export const CadastrarTransacao = () => {
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
-  const [select3, setSelect3] = useState(false);
-  const [select4, setSelect4] = useState(false);
 
   const [select1Value, setSelect1Value] = useState();
   const [select2Value, setSelect2Value] = useState();
-  const [select3Value, setSelect3Value] = useState();
-  const [select4Value, setSelect4Value] = useState();
 
-  const [clients, setClient] = useState([]);
+  const { data } = useDataContext();
 
-  (async () => {
-    if (clients.length === 0) {
-      await axios
-        .get("https://api-invest-crud.herokuapp.com/clientes/")
-        .then(({ data }) => {
-          const retornar = data.clientes.map((item) => {
-            return { value: item.nome, label: item.nome };
-          });
-          if (clients.length !== retornar.length) {
-            setClient(retornar);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  })();
+  const clientes = data.clientes.map((item) => {
+    return {
+      label: item.nome,
+      value: item.nome,
+    };
+  });
 
-  const [ativos, setAtivos] = useState([]);
-
-
-  (async () => {
-    if (ativos.length === 0) {
-      await axios
-        .get("https://api-invest-crud.herokuapp.com/mostrarativos/")
-        .then(({ data }) => {
-          if (ativos.length > data.ativos.length) {
-            setAtivos(data.ativos);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  })();
+  const ativos = data.ativos.map((item) => {
+    return {
+      label: item.nome_ativo,
+      value: item.nome_ativo,
+    };
+  });
 
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (inputs) => {
-    console.log(inputs);
+    const ativoSelecionado = data.ativos.find((item) => {
+      return item.nome_ativo === select2Value;
+    });
+
+    await axios.post(
+      "https://api-invest-crud.herokuapp.com/cadastrartransacoes/json",
+      {
+        cliente: select1Value,
+        ticker: ativoSelecionado.nome_ativo,
+        ativo_id: ativoSelecionado.ativo_id,
+        ...inputs,
+      }
+    );
+
     reset();
+    setSelect1Value("");
+    setSelect2Value("");
   };
 
   return (
     <Container style={{ paddingTop: "96px" }}>
-      <Typography variant="h4">Cadastrar Transações</Typography>
       <form
         style={{
           display: "grid",
@@ -96,55 +86,10 @@ export const CadastrarTransacao = () => {
             onClose={() => setSelect1(false)}
             onOpen={() => setSelect1(true)}
             value={select1Value}
+            variant="outlined"
             onChange={(e) => setSelect1Value(e.target.value)}
           >
-            {[].map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
-        <div>
-          <InputLabel id="demo-controlled-open-select-label">
-            Tipo de Ativo
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={select2}
-            onClose={() => setSelect2(false)}
-            onOpen={() => setSelect2(true)}
-            value={select2Value}
-            onChange={(e) => setSelect2Value(e.target.value)}
-          >
-            {clients.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
-        <div>
-          <InputLabel id="demo-controlled-open-select-label">
-            Ticket do Ativo
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={select3}
-            onClose={() => setSelect3(false)}
-            onOpen={() => setSelect3(true)}
-            value={select3Value}
-            onChange={(e) => setSelect3Value(e.target.value)}
-          >
-            {ativos.map((item, index) => {
+            {clientes.map((item, index) => {
               return (
                 <MenuItem key={index} value={item.value}>
                   {item.label}
@@ -161,13 +106,14 @@ export const CadastrarTransacao = () => {
             style={{ width: "100%" }}
             labelId="demo-controlled-open-select-label"
             id="demo-controlled-open-select"
-            open={select4}
-            onClose={() => setSelect4(false)}
-            onOpen={() => setSelect4(true)}
-            value={select4Value}
-            onChange={(e) => setSelect4Value(e.target.value)}
+            open={select2}
+            onClose={() => setSelect2(false)}
+            onOpen={() => setSelect2(true)}
+            value={select2Value}
+            variant="outlined"
+            onChange={(e) => setSelect2Value(e.target.value)}
           >
-            {[].map((item, index) => {
+            {ativos.map((item, index) => {
               return (
                 <MenuItem key={index} value={item.value}>
                   {item.label}
@@ -176,19 +122,33 @@ export const CadastrarTransacao = () => {
             })}
           </Select>
         </div>
+
         <TextField
           style={{ marginBottom: "1rem" }}
-          type="datetime-local"
+          type="date"
           variant="outlined"
           name="data"
           inputRef={register}
         />
+
+        <TextField
+          style={{ marginBottom: "1rem" }}
+          type="number"
+          variant="outlined"
+          name="preco"
+          label="Preço"
+          inputRef={register}
+        />
+
         <TextField
           style={{ marginBottom: "1rem" }}
           variant="outlined"
-          name="data"
+          name="quantidade"
+          type="number"
+          label="Quantidade"
           inputRef={register}
         />
+
         <Button variant="contained" color="primary" type="submit">
           Cadastrar Transação
         </Button>
