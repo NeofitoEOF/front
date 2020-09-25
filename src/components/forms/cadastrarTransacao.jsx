@@ -74,7 +74,7 @@ export const CadastrarTransacao = () => {
 
   return (
     <Container style={{ paddingTop: "96px" }}>
-      <Typography variant="h4">Cadastrar Depósitos e Resgates</Typography>
+      <Typography variant="h4">Cadastrar Transações</Typography>
       <form
         style={{
           display: "grid",

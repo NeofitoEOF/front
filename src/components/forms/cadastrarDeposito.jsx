@@ -29,6 +29,8 @@ export const CadastrarDeposito = () => {
 
   const [clients, setClient] = useState([]);
 
+// Buscar clientes
+
   (async () => {
     if (clients.length === 0) {
       await axios
@@ -111,75 +113,7 @@ export const CadastrarDeposito = () => {
             })}
           </Select>
         </div>
-        <div>
-          <InputLabel id="demo-controlled-open-select-label">
-            Tipo de Ativo
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={select2}
-            onClose={() => setSelect2(false)}
-            onOpen={() => setSelect2(true)}
-            value={select2Value}
-            onChange={(e) => setSelect2Value(e.target.value)}
-          >
-            {ativos.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
-        <div>
-          <InputLabel id="demo-controlled-open-select-label">
-            Ticket do Ativo
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={select3}
-            onClose={() => setSelect3(false)}
-            onOpen={() => setSelect3(true)}
-            value={select3Value}
-            onChange={(e) => setSelect3Value(e.target.value)}
-          >
-            {[].map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
-        <div>
-          <InputLabel id="demo-controlled-open-select-label">
-            Nome do Ativo
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={select4}
-            onClose={() => setSelect4(false)}
-            onOpen={() => setSelect4(true)}
-            value={select4Value}
-            onChange={(e) => setSelect4Value(e.target.value)}
-          >
-            {[].map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
+     
         <TextField
           style={{ marginBottom: "1rem" }}
           type="datetime-local"
@@ -191,6 +125,15 @@ export const CadastrarDeposito = () => {
           style={{ marginBottom: "1rem" }}
           variant="outlined"
           name="data"
+          label="Banco"
+          inputRef={register}
+        />
+
+          <TextField
+          style={{ marginBottom: "1rem" }}
+          variant="outlined"
+          name="data"
+          label="R$: Deposito ou Resgate"
           inputRef={register}
         />
         <Button variant="contained" color="primary" type="submit">

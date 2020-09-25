@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ListItem, ListItemIcon, ListItemText, List } from "@material-ui/core";
-import { MailOutline } from "@material-ui/icons";
+import { 
+  MailOutline,
+ } from "@material-ui/icons";
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import BusinessIcon from '@material-ui/icons/Business';
+import SyncAltIcon from '@material-ui/icons/SyncAlt';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+
+
 import styled from "styled-components";
 import { Header } from "../Header";
 
@@ -48,7 +57,7 @@ export const Navigator = () => {
                 onClick={() => history.push("/ativo/cadastrar")}
               >
                 <ListItemIcon>
-                  <MailOutline />
+                  <MonetizationOnIcon  />
                 </ListItemIcon>
                 <ListItemText primary="Cadastrar ativo" />
               </NewListItem>
@@ -57,7 +66,7 @@ export const Navigator = () => {
                 onClick={() => history.push("/cliente/cadastrar")}
               >
                 <ListItemIcon>
-                  <MailOutline />
+                  <AssignmentIndIcon />
                 </ListItemIcon>
                 <ListItemText primary="Cadastrar cliente" />
               </NewListItem>
@@ -66,7 +75,7 @@ export const Navigator = () => {
                 onClick={() => history.push("/deposito/cadastrar")}
               >
                 <ListItemIcon>
-                  <MailOutline />
+                  <LocalAtmIcon />
                 </ListItemIcon>
                 <ListItemText primary="Cadastrar depósito" />
               </NewListItem>
@@ -75,7 +84,7 @@ export const Navigator = () => {
                 onClick={() => history.push("/corretora/cadastrar")}
               >
                 <ListItemIcon>
-                  <MailOutline />
+                  <BusinessIcon />
                 </ListItemIcon>
                 <ListItemText primary="Cadastrar corretora ou banco" />
               </NewListItem>
@@ -84,7 +93,7 @@ export const Navigator = () => {
                 onClick={() => history.push("/transacao/cadastrar")}
               >
                 <ListItemIcon>
-                  <MailOutline />
+                  <SyncAltIcon />
                 </ListItemIcon>
                 <ListItemText primary="Cadastrar transação" />
               </NewListItem>
