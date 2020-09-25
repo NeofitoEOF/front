@@ -42,6 +42,20 @@ export const CadastroCorretora = () => {
 
   const onSubmit = async (inputs) => {
     console.log(inputs);
+
+    // await axios
+    //   .post("https://api-invest-crud.herokuapp.com/cadastrartransacoes/json", {
+    //     excecao: select1Value,
+    //     ativ_input: select1Value,
+    //     ...inputs,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     reset();
   };
 

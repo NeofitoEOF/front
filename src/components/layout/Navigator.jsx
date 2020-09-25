@@ -7,7 +7,7 @@ import { Header } from "../Header";
 
 const NewListItem = styled(ListItem)`
   margin: 0.5rem;
-`
+`;
 
 export const Navigator = () => {
   const [isVisible, setVisibility] = useState();
@@ -39,10 +39,19 @@ export const Navigator = () => {
               backgroundColor: "#FFFFFF",
               boxShadow: "-5px 0px 23px 0px rgba(0,0,0,0.75)",
               zIndex: 50,
-              transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms"
+              transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms",
             }}
           >
             <List style={{ paddingTop: "96px" }}>
+              <NewListItem
+                button
+                onClick={() => history.push("/ativo/cadastrar")}
+              >
+                <ListItemIcon>
+                  <MailOutline />
+                </ListItemIcon>
+                <ListItemText primary="Cadastrar ativo" />
+              </NewListItem>
               <NewListItem
                 button
                 onClick={() => history.push("/cliente/cadastrar")}
