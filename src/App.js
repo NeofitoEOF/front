@@ -9,8 +9,15 @@ import {
 } from "react-router-dom";
 import { Navigator } from "./components/layout"
 import { DataContextProvider } from "./components/context/ContextProvider"
+import { Login } from "./components/screens/Login"
 
 function App() {
+  const login = localStorage.getItem("login");
+
+  if (!login) {
+    return <Login />
+  }
+
   return (
     <>
       <Router>
