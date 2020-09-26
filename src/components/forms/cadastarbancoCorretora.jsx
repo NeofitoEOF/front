@@ -82,46 +82,43 @@ export const CadastroCorretora = () => {
           </Select>
         </div>
         <TextField
-          name="banco_numero"
-          variant="outlined"
-          type="number"
-          label="Banco - Número"
-          helperText={errors.banco_numero && "O número do banco é obrigatório"}
-          error={errors.banco_numero}
-          ref={register({ required: true })}
-        />
-        <TextField
+          style={{ marginBottom: "1rem" }}
           name="banco_nome"
           variant="outlined"
           label="Banco - Nome"
-          helperText={errors.banco_nome && "O nome do banco é obrigatório"}
+          helperText={errors.banco_nome && "Banco - Nome é obrigatório"}
           error={errors.banco_nome}
-          ref={register({ required: true })}
+          inputRef={register({ required: true })}
         />
+
         <TextField
+          style={{ marginBottom: "1rem" }}
           name="agencia"
           variant="outlined"
           label="Agencia"
-          helperText={errors.agencia && "O agência é obrigatório"}
+          helperText={errors.agencia && "Agencia é obrigatório"}
           error={errors.agencia}
-          ref={register({ required: true })}
+          inputRef={register({ required: true })}
         />
+
         <TextField
+          style={{ marginBottom: "1rem" }}
           name="conta_corrente"
           variant="outlined"
           label="Conta-Corrente"
-          helperText={errors.conta_corrente && "O conta corrente é obrigatório"}
+          helperText={errors.conta_corrente && "Conta-Corrente é obrigatório"}
           error={errors.conta_corrente}
-          ref={register({ required: true })}
+          inputRef={register({ required: true })}
         />
+
         <TextField
+          style={{ marginBottom: "1rem" }}
           name="saldo_inicial"
-          type="number"
           variant="outlined"
           label="Saldo Inicial"
-          helperText={errors.saldo_inicial && "O saldo inicial é obrigatório"}
+          helperText={errors.saldo_inicial && "Saldo Inicial é obrigatório"}
           error={errors.saldo_inicial}
-          ref={register({ required: true })}
+          inputRef={register({ required: true })}
         />
         <Button variant="contained" color="primary">
           Cadastrar Conta

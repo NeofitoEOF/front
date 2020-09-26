@@ -121,7 +121,7 @@ export const CadastrarTransacao = () => {
           variant="outlined"
           name="data"
           inputRef={register({ required: true })}
-          helperText={errors.data && "O data é obrigatório"}
+          helperText={errors.data && "Data é obrigatório"}
           error={errors.data}
         />
 
@@ -132,7 +132,7 @@ export const CadastrarTransacao = () => {
           name="preco"
           label="Preço"
           inputRef={register({ required: true })}
-          helperText={errors.preco && "O preço é obrigatório"}
+          helperText={errors.preco && "Preço é obrigatório"}
           error={errors.preco}
         />
 
@@ -143,7 +143,7 @@ export const CadastrarTransacao = () => {
           type="number"
           label="Quantidade"
           inputRef={register({ required: true })}
-          helperText={errors.quantidade && "O quantidade é obrigatório"}
+          helperText={errors.quantidade && "Quantidade é obrigatório"}
           error={errors.quantidade}
         />
 

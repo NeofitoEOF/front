@@ -25,7 +25,7 @@ export const CadastrarAtivo = () => {
   const [select1Value, setSelect1Value] = useState();
   const [select2Value, setSelect2Value] = useState();
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
   const onSubmit = async (inputs) => {
     await axios.post(
       "https://api-invest-crud.herokuapp.com/cadastrarativos/json",
@@ -54,15 +54,20 @@ export const CadastrarAtivo = () => {
       >
         <TextField
           name="nome_ativo"
-          placeholder="Nome do Ativo"
-          inputRef={register}
+          label="Nome do Ativo"
           variant="outlined"
+          helperText={errors.nome_ativo && "Nome do Ativo é obrigatório"}
+          error={errors.nome_ativo}
+          inputRef={register({ required: true })}
         />
+
         <TextField
           name="ticket_ativo"
-          placeholder="Ticket do Ativo"
-          inputRef={register}
+          label="Ticket do Ativo"
           variant="outlined"
+          helperText={errors.ticket_ativo && "Ticket do Ativo é obrigatório"}
+          error={errors.ticket_ativo}
+          inputRef={register({ required: true })}
         />
 
         <div>
@@ -75,6 +80,8 @@ export const CadastrarAtivo = () => {
             style={{ width: "100%" }}
             labelId="select1"
             id="select1"
+            variant="outlined"
+            label="Exceção"
             open={select1}
             onClose={() => setSelect1(false)}
             onOpen={() => setSelect1(true)}
@@ -97,6 +104,7 @@ export const CadastrarAtivo = () => {
             labelId="select2"
             id="select2"
             open={select2}
+            variant="outlined"
             onClose={() => setSelect2(false)}
             onOpen={() => setSelect2(true)}
             value={select2Value}

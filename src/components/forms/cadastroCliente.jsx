@@ -9,7 +9,6 @@ import {
   InputLabel,
   Container,
 } from "@material-ui/core";
-import InputMask from "react-input-mask";
 
 export const CadastroCliente = () => {
   const [prospect, setProspect] = React.useState(0);
@@ -78,65 +77,52 @@ export const CadastroCliente = () => {
             name="nome"
             variant="outlined"
             label="Nome"
-            inputRef={register}
+            helperText={errors.nome && "Nome é obrigatório"}
+            error={errors.nome}
+            inputRef={register({ required: true })}
           />
-          <InputMask
-            mask="999.999.999-99"
-            alwaysShowMask={false}
-            maskChar={null}
-          >
-            {() => (
-              <TextField
-                style={{ marginBottom: "1rem" }}
-                name="cpf"
-                label="CPF"
-                pattern="[0-9]*"
-                variant="outlined"
-                helperText={errors.cpf && "O telefone é obrigatório"}
-                error={errors.cpf}
-                ref={register({
-                  required: true,
-                  pattern: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-                })}
-              />
-            )}
-          </InputMask>
 
-          <InputMask
-            mask="(99) 99999-9999"
-            alwaysShowMask={false}
-            maskChar={null}
-          >
-            {() => (
-              <TextField
-                style={{ marginBottom: "1rem" }}
-                name="telefone"
-                variant="outlined"
-                label="Telefone para contato"
-                helperText={errors.telefone && "O telefone é obrigatório"}
-                error={errors.telefone}
-                ref={register({ required: true, minLength: 15 })}
-              />
-            )}
-          </InputMask>
+          <TextField
+            style={{ marginBottom: "1rem" }}
+            name="cpf"
+            variant="outlined"
+            label="CPF"
+            helperText={errors.cpf && "CPF é obrigatório"}
+            error={errors.cpf}
+            inputRef={register({
+              required: true,
+              pattern: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+            })}
+          />
+
+          <TextField
+            style={{ marginBottom: "1rem" }}
+            name="telefone"
+            variant="outlined"
+            label="Telefone"
+            helperText={errors.telefone && "Telefone é obrigatório"}
+            error={errors.telefone}
+            inputRef={register({ required: true, minLength: 15 })}
+          />
 
           <TextField
             style={{ marginBottom: "1rem" }}
             name="email"
             variant="outlined"
+            type="email"
             label="E-mail"
-            helperText={errors.email && "O E-mail é obrigatório"}
+            helperText={errors.email && "E-mail é obrigatório"}
             error={errors.email}
-            inputRef={register({ required: true})}
+            inputRef={register({ required: true })}
           />
           <TextField
             style={{ marginBottom: "1rem" }}
             name="endereco"
             variant="outlined"
             label="Endereço"
-            helperText={errors.endereco && "O endereço é obrigatório"}
+            helperText={errors.endereco && "Endereço é obrigatório"}
             error={errors.endereco}
-            inputRef={register({ required: true})}
+            inputRef={register({ required: true })}
           />
 
           <Button
