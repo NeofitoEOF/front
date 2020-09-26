@@ -1,27 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {
   Button,
   TextField,
-  Select,
   MenuItem,
-  InputLabel,
   Container,
 } from "@material-ui/core";
+import { ReactHookFormSelect } from "../widgets/Select";
 
 export const CadastroCliente = () => {
-  const [prospect, setProspect] = React.useState(0);
-  const [select1, setSelect1] = useState(false);
-
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, handleSubmit, reset, control, errors } = useForm();
 
   const onSubmit = async (inputs) => {
-    if (prospect === 1) inputs["prospect"] = "Cliente";
-    else if (prospect === 2) inputs["prospect"] = "Cliente em Potencial";
-
-    console.log(inputs);
-
     axios
       .post(
         "https://api-invest-crud.herokuapp.com/cadastrarclientes/json",
@@ -36,10 +27,6 @@ export const CadastroCliente = () => {
     reset();
   };
 
-  const handleChange = (event) => {
-    setProspect(event.target.value);
-  };
-
   return (
     <>
       <Container style={{ paddingTop: "96px" }}>
@@ -52,25 +39,18 @@ export const CadastroCliente = () => {
           }}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div>
-            <InputLabel id="demo-controlled-open-select-label">
-              Cliente & Possivel Cliente
-            </InputLabel>
-            <Select
-              style={{ width: "100%" }}
-              name="prospect"
-              labelId="demo-controlled-open-select-label"
-              id="demo-controlled-open-select"
-              open={select1}
-              onClose={() => setSelect1(false)}
-              onOpen={() => setSelect1(true)}
-              value={prospect}
-              onChange={handleChange}
-            >
-              <MenuItem value="cliente">Cliente</MenuItem>
-              <MenuItem value="nao">Possível Cliente</MenuItem>
-            </Select>
-          </div>
+          <ReactHookFormSelect
+            id="prospect"
+            name="prospect"
+            control={control}
+            defaultValue={""}
+            variant="outlined"
+            margin="normal"
+            label="Cliente ou Possivel Cliente"
+          >
+            <MenuItem value="Cliente">Cliente</MenuItem>
+            <MenuItem value="Cliente em Potencial">Possível Cliente</MenuItem>
+          </ReactHookFormSelect>
 
           <TextField
             style={{ marginBottom: "1rem" }}

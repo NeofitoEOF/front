@@ -1,25 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import {
-  Container,
-  Button,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
-import styled from "styled-components";
+import { Container, Button, TextField, MenuItem } from "@material-ui/core";
 import * as axios from "axios";
 import { useDataContext } from "../context/ContextProvider";
-
-const EmptyValue = styled.div`
-  height: 1.5rem;
-`;
+import { ReactHookFormSelect } from "../widgets/Select";
 
 export const CadastroCorretora = () => {
-  const [select1, setSelect1] = useState(false);
-  const [select1Value, setSelect1Value] = useState();
-  const { register, handleSubmit, reset, errors } = useForm();
+  const { register, handleSubmit, reset, errors, control } = useForm();
 
   const { data } = useDataContext();
 
@@ -33,13 +20,9 @@ export const CadastroCorretora = () => {
   const onSubmit = async (inputs) => {
     await axios.post(
       "https://api-invest-crud.herokuapp.com/cadastrarbancos/json",
-      {
-        cliente: select1Value,
-        ...inputs,
-      }
+      inputs
     );
 
-    setSelect1Value("");
     reset();
   };
 
@@ -54,33 +37,24 @@ export const CadastroCorretora = () => {
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div>
-          <InputLabel style={{ marginBottom: "1rem" }} id="select1">
-            Cliente
-          </InputLabel>
-          <Select
-            style={{ width: "100%" }}
-            labelId="select1"
-            id="select1"
-            variant="outlined"
-            open={select1}
-            onClose={() => setSelect1(false)}
-            onOpen={() => setSelect1(true)}
-            value={select1Value}
-            onChange={(e) => setSelect1Value(e.target.value)}
-          >
-            <MenuItem value="">
-              <EmptyValue />
-            </MenuItem>
-            {clientes.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </div>
+        <ReactHookFormSelect
+          id="cliente"
+          name="cliente"
+          control={control}
+          defaultValue={""}
+          variant="outlined"
+          margin="normal"
+          label="Cliente"
+        >
+          {clientes.map((item, index) => {
+            return (
+              <MenuItem key={index} value={item.value}>
+                {item.label}
+              </MenuItem>
+            );
+          })}
+        </ReactHookFormSelect>
+
         <TextField
           style={{ marginBottom: "1rem" }}
           name="banco_nome"
