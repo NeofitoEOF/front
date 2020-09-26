@@ -4,7 +4,6 @@ import {
   Container,
   Button,
   TextField,
-  Typography,
   InputLabel,
   Select,
   MenuItem,
@@ -20,7 +19,7 @@ const EmptyValue = styled.div`
 export const CadastroCorretora = () => {
   const [select1, setSelect1] = useState(false);
   const [select1Value, setSelect1Value] = useState();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
 
   const { data } = useDataContext();
 
@@ -40,6 +39,7 @@ export const CadastroCorretora = () => {
       }
     );
 
+    setSelect1Value("");
     reset();
   };
 
@@ -86,32 +86,42 @@ export const CadastroCorretora = () => {
           variant="outlined"
           type="number"
           label="Banco - Número"
-          ref={register}
+          helperText={errors.banco_numero && "O número do banco é obrigatório"}
+          error={errors.banco_numero}
+          ref={register({ required: true })}
         />
         <TextField
           name="banco_nome"
           variant="outlined"
           label="Banco - Nome"
-          ref={register}
+          helperText={errors.banco_nome && "O nome do banco é obrigatório"}
+          error={errors.banco_nome}
+          ref={register({ required: true })}
         />
         <TextField
           name="agencia"
           variant="outlined"
           label="Agencia"
-          ref={register}
+          helperText={errors.agencia && "O agência é obrigatório"}
+          error={errors.agencia}
+          ref={register({ required: true })}
         />
         <TextField
-          name="conto_corrente"
+          name="conta_corrente"
           variant="outlined"
           label="Conta-Corrente"
-          ref={register}
+          helperText={errors.conta_corrente && "O conta corrente é obrigatório"}
+          error={errors.conta_corrente}
+          ref={register({ required: true })}
         />
         <TextField
           name="saldo_inicial"
           type="number"
           variant="outlined"
           label="Saldo Inicial"
-          ref={register}
+          helperText={errors.saldo_inicial && "O saldo inicial é obrigatório"}
+          error={errors.saldo_inicial}
+          ref={register({ required: true })}
         />
         <Button variant="contained" color="primary">
           Cadastrar Conta

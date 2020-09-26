@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import {
   Button,
   Container,
   Select,
   InputLabel,
   TextField,
-  Typography,
   MenuItem,
 } from "@material-ui/core";
 import * as axios from "axios";
-
-const EmptyValue = styled.div`
-  height: 1.5rem;
-`;
 
 const AITVO_TIPOS = [
   { value: "titulo_publico", label: "Titulos Públicos" },
@@ -42,6 +36,8 @@ export const CadastrarAtivo = () => {
       }
     );
 
+    setSelect1Value("");
+    setSelect2Value("");
     reset();
   };
 

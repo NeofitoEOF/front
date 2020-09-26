@@ -3,25 +3,17 @@ import { useForm } from "react-hook-form";
 import {
   Button,
   Container,
-  Typography,
   InputLabel,
   Select,
   MenuItem,
   TextField,
 } from "@material-ui/core";
 import * as axios from "axios";
-import InputMask from "react-input-mask";
-import styled from "styled-components";
 import { useDataContext } from "../context/ContextProvider";
-
-const EmptyValue = styled.div`
-  height: 1.5rem;
-`;
 
 export const CadastrarTransacao = () => {
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
-
   const [select1Value, setSelect1Value] = useState();
   const [select2Value, setSelect2Value] = useState();
 
@@ -41,7 +33,7 @@ export const CadastrarTransacao = () => {
     };
   });
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
 
   const onSubmit = async (inputs) => {
     const ativoSelecionado = data.ativos.find((item) => {
@@ -128,7 +120,9 @@ export const CadastrarTransacao = () => {
           type="date"
           variant="outlined"
           name="data"
-          inputRef={register}
+          inputRef={register({ required: true })}
+          helperText={errors.data && "O data é obrigatório"}
+          error={errors.data}
         />
 
         <TextField
@@ -137,7 +131,9 @@ export const CadastrarTransacao = () => {
           variant="outlined"
           name="preco"
           label="Preço"
-          inputRef={register}
+          inputRef={register({ required: true })}
+          helperText={errors.preco && "O preço é obrigatório"}
+          error={errors.preco}
         />
 
         <TextField
@@ -146,7 +142,9 @@ export const CadastrarTransacao = () => {
           name="quantidade"
           type="number"
           label="Quantidade"
-          inputRef={register}
+          inputRef={register({ required: true })}
+          helperText={errors.quantidade && "O quantidade é obrigatório"}
+          error={errors.quantidade}
         />
 
         <Button variant="contained" color="primary" type="submit">

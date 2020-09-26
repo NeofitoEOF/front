@@ -3,26 +3,20 @@ import { useForm } from "react-hook-form";
 import {
   Button,
   Container,
-  Typography,
   InputLabel,
   Select,
   MenuItem,
   TextField,
 } from "@material-ui/core";
 import * as axios from "axios";
-import styled from "styled-components";
 import { useDataContext } from "../context/ContextProvider";
-
-const EmptyValue = styled.div`
-  height: 1.5rem;
-`;
 
 export const CadastrarDeposito = () => {
   const [select1, setSelect1] = useState(false);
-  const [select1Value, setSelect1Value] = useState();
-
   const [select2, setSelect2] = useState(false);
+  const [select1Value, setSelect1Value] = useState();
   const [select2Value, setSelect2Value] = useState();
+
 
   const { data } = useDataContext();
 
@@ -44,7 +38,7 @@ export const CadastrarDeposito = () => {
     };
   });
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, errors } = useForm();
 
   const onSubmit = async (inputs) => {
     const today = new Date();
@@ -61,6 +55,8 @@ export const CadastrarDeposito = () => {
       }
     );
 
+    setSelect1Value("");
+    setSelect2Value("");
     reset();
   };
 
@@ -130,7 +126,9 @@ export const CadastrarDeposito = () => {
           variant="outlined"
           name="deposito_resgate"
           label="R$: Deposito ou Resgate"
-          inputRef={register}
+          inputRef={register({ required: true })}
+          helperText={errors.deposito_resgate && "O valor é obrigatório"}
+          error={errors.deposito_resgate}
           type="number"
         />
         <Button variant="contained" color="primary" type="submit">
