@@ -1,0 +1,55 @@
+#draw-area-01 {
+    height: 300px;
+}
+
+#draw-area-01 .tick line {
+    stroke-width: 0;
+}
+
+#draw-area-01 .grid .tick line {
+    stroke-width: 1;
+}
+
+#draw-area-01 svg .bar-rect:hover {
+    fill: rgba(102, 169, 146, 0.85);
+}
+
+#draw-area-01 > div,
+#draw-area-02 > div,
+#draw-area-03 > div {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#draw-area-01 > div > svg,
+#draw-area-02 > div > svg,
+#draw-area-03 > div > svg{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#draw-area-01 .barchart-tooltip {
+    visibility: visible;
+    z-index: 4645656456;
+    color: #66a992;
+    width: 100px;
+    height: 100px;
+}
+
+#draw-area-02 {
+    height: 300px;
+}
+
+@media screen and (min-width: 1024px) {
+    #draw-area-02 .tick text {
+        font-size: 1.25em;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #draw-area-02 .tick text {
+        font-size: 1em;
+    }
+}

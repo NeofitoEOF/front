@@ -1,0 +1,121 @@
+
+#draw-area-01 {
+    height: 500px;
+}
+
+#draw-area-02 {
+    height: 200px;
+}
+
+#draw-area-02 .tick line {
+    stroke-width: 0;
+}
+
+#draw-area-02 .tick text {
+    font-family: Roboto, Helvetica, Aerial, sans-serif;
+}
+
+#draw-area-03 {
+    height: fit-content;
+}
+
+
+#draw-area-03 .table-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#draw-area-03 .table-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#draw-area-03 table {
+    border-collapse: collapse;
+    margin: 0.75em;
+
+    font-family: Roboto, Helvetica, Aerial, sans-serif;
+    font-size: 0.9em;
+}
+
+
+#draw-area-03 table th {
+    padding: 0.1em;
+    text-transform: uppercase;
+}
+
+#draw-area-03 table tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#draw-area-03 table thead {
+    background-color: #dddddd;
+}
+
+#draw-area-03 table td {
+    padding: 0.15em;
+}
+
+#draw-area-03 table td,
+th {
+    border: 1px solid #dddddd;
+}
+
+#draw-area-03 table tbody tr td:first-child {
+    text-align: right;
+    padding: 0.1em 0.15em;
+}
+
+#draw-area-03 table tbody tr td:nth-child(2),
+td:nth-child(3) {
+    text-align: center;
+}
+
+#draw-area-01 > div,
+#draw-area-02 > div,
+#draw-area-03 > div {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#draw-area-01 > div > svg,
+#draw-area-02 > div > svg,
+#draw-area-03 > div > svg {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#draw-area-04 {
+    flex-direction: column;
+    height: 500px;
+}
+
+#draw-area-04 div div {
+    width: 100%;
+}
+
+#draw-area-04 div div#_chart_04 {
+    height: 50%;
+}
+
+#draw-area-04 div div#_chart_04_legend {
+    height: 30%;
+}
+
+@media screen and (min-width: 1024px) {
+    #draw-area-02 .tick text {
+        font-size: 1.25em;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #draw-area-02 .tick text {
+        font-size: 1em;
+    }
+}

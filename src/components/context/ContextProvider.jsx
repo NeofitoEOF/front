@@ -41,7 +41,7 @@ export const DataContextProvider = ({ children }) => {
 
   return (
     <Context.Provider value={providerValue}>
-      {data && children}
+      {children}
     </Context.Provider>
   );
 };
