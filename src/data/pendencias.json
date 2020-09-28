@@ -1,0 +1,82 @@
+{
+  "pendencias": {
+    "name": "Cidade",
+    "children": [
+      {
+        "name": "Administração",
+        "children": [
+          {
+            "name": "Tarefas",
+            "children": [
+              {
+                "name": "Etapas",
+                "children": [
+                  {
+                    "name": "Card 01",
+                    "date": 1596628244046
+                  },
+                  {
+                    "name": "Card 02",
+                    "date": 1596628244046
+                  }
+                ]
+              },
+              {
+                "name": "Etapas",
+                "children": [
+                  {
+                    "name": "Card 01",
+                    "date": 1596628244046
+                  },
+                  {
+                    "name": "Card 02",
+                    "date": 1596628244046
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Financeiro",
+        "children": [
+          {
+            "name": "Tarefas",
+            "children": [
+              {
+                "name": "Etapas",
+                "children": [
+                  {
+                    "name": "Card",
+                    "date": 1596628244046
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Qualidade",
+        "children": [
+          {
+            "name": "Tarefas",
+            "children": [
+              {
+                "name": "Etapas",
+                "children": [
+                  {
+                    "name": "Card",
+                    "date": 1596628244046
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
