@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { generate_vol_line_chart, generate_line_chart } from '../../app/lineChart';
+import {generate_ip_table  } from '../../app/table_indicadores_performance';
+
 import './index.css';
 import '../styles.css';
 
@@ -11,6 +13,9 @@ const Risk = () => {
 
     const pie = document.querySelector(".pie");
     generate_vol_line_chart(pie);
+    
+    const Performance = document.querySelector(".Performance");
+    generate_ip_table(Performance);
   });
 
   return (
@@ -33,7 +38,7 @@ const Risk = () => {
           <header>
             <span>Indicadores de Performance</span>
           </header>
-          <div></div>
+          <div className="Performance"></div>
         </div>
 
         <div id="draw-area-04" className="draw-container col-4 col-sm-12">

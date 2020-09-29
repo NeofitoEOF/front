@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './index.css';
 import '../styles.css';
 import { generate_evolution_bar_chart } from '../../app/barchart_evolucao_patrimonio';
 
-
 const Patrimony = () => {
+    useEffect(() => {
+    const bar = document.querySelector(".bar");
+    generate_evolution_bar_chart(".bar"); 
+    });
+
   return (
     <>
       <div>
@@ -14,8 +18,7 @@ const Patrimony = () => {
             <header>
               <span>Evolução do patrimônio</span>
             </header>
-            <div>
-            </div>
+            <div className="bar"></div>
           </div>
 
           <div id="draw-area-02" className="draw-container col-4 col-sm-12">
@@ -51,4 +54,4 @@ const Patrimony = () => {
   )
 }
 
-export default index
+export default Patrimony;

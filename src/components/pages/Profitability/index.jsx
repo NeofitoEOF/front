@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { generate_line_chart } from '../../app/lineChart.js';
 import { generate_bar_m_chart } from '../../app/barChart.js';
 import { generate_bar_y_chart } from '../../app/bar_y_chart.js';
@@ -7,6 +7,19 @@ import './index.css';
 import '../styles.css';
 
 const Profitability = () => {
+    useEffect(() => {
+    const line = document.querySelector(".line");
+    generate_line_chart("line");
+
+    const barrinha = document.querySelector(".barrinha");
+    generate_bar_m_chart("barrinha");
+    const barra = document.querySelector(".barra");
+    generate_bar_y_chart("barra");
+
+    const rentabilidade = document.querySelector(".rentabilidade");
+    generate_table("rentabilidade");
+  });
+
   return (
     <>
       <div>
@@ -17,26 +30,27 @@ const Profitability = () => {
             <header>
               <span>Evolução do valor da cota do portfolio ( R$ )</span>
             </header>
-            <div></div>
+            <div className="line"></div>
           </div>
 
           <div id="draw-area-02" className="draw-container col-12 col-sm-12">
             <header>
               <span>Rentabilidade x Meta Atuarial ( % Mensal )</span>
             </header>
-            <div></div>
+            <div className="barrinha"></div>
           </div>
 
           <div id="draw-area-03" className="draw-container col-6 col-sm-12">
             <header>
               <span>Rentabilidade x Meta Atuarial ( % )</span>
             </header>
-            <div></div>
+            <div className="barra"></div>
           </div>
 
           <div id="draw-area-04" className="draw-container col-6 col-sm-12">
             <header>
               <span>Rentabilidade x Meta Atuarial ( % Ano )</span>
+              <div className="rentabilidade"></div>
             </header>
           </div>
 
@@ -46,4 +60,4 @@ const Profitability = () => {
   )
 }
 
-export default index
+export default Profitability;
