@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { Header } from "../Header";
 
 const NewListItem = styled(ListItem)`
-  margin: 0.3rem;
+  margin: 0.5rem;
 `;
 
 export const Navigator = () => {
@@ -78,7 +78,7 @@ export const Navigator = () => {
           <div
             style={{
               height: "100vh",
-              width: "30%",
+              width: "22%",
               top: 0,
               left: 0,
               backgroundColor: "#FFFFFF",

@@ -38,7 +38,7 @@ export  const Profitability = () => {
 
           <div id="draw-area-02" className="draw-container col-12 col-sm-12">
             <header>
-              <span>Rentabilidade x Meta Atuarial ( % Mensal )</span>
+              <span style={{width: "100%", height: "100%"}}>Rentabilidade x Meta Atuarial ( % Mensal )</span>
             </header>
             <div className="bar"></div>
           </div>
