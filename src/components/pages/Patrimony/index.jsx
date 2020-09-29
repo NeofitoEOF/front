@@ -2,16 +2,20 @@ import React, {useEffect} from 'react';
 import './index.css';
 import '../styles.css';
 import { generate_evolution_bar_chart } from '../../app/barchart_evolucao_patrimonio';
+import { Container } from "@material-ui/core";
 
-const Patrimony = () => {
+export const Patrimony = () => {
     useEffect(() => {
-    const bar = document.querySelector(".bar");
-    generate_evolution_bar_chart(".bar"); 
+
+   
+      const bar = document.querySelector(".bar");
+      generate_evolution_bar_chart(bar);
+
     });
 
   return (
-    <>
-      <div>
+      <Container style={{ paddingTop: "96px" }}>
+
         <div className="container">
 
           <div id="draw-area-01" className="draw-container col-8 col-sm-12">
@@ -48,10 +52,9 @@ const Patrimony = () => {
             </header>
             <div></div>
           </div>
-        </div>
-      </div>
-    </>
-  )
+        </div> 
+      </Container>
+  );
 }
 
 export default Patrimony;

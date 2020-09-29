@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { Header } from "../Header";
 
 const NewListItem = styled(ListItem)`
-  margin: 0.5rem;
+  margin: 0.3rem;
 `;
 
 export const Navigator = () => {

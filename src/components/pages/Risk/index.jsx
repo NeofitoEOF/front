@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { generate_vol_line_chart, generate_line_chart } from '../../app/lineChart';
 import {generate_ip_table  } from '../../app/table_indicadores_performance';
-
 import './index.css';
 import '../styles.css';
+import { Container } from "@material-ui/core";
 
-const Risk = () => {
+export const Risk = () => {
 
   useEffect(() => {
     const line = document.querySelector(".line");
@@ -16,10 +16,11 @@ const Risk = () => {
     
     const Performance = document.querySelector(".Performance");
     generate_ip_table(Performance);
+
   });
 
   return (
-    <>
+    <Container style={{ paddingTop: "96px" }}>
       <div className="container">
         <div id="draw-area-01" className="draw-container col-12 col-sm-12">
           <header>
@@ -50,10 +51,9 @@ const Risk = () => {
             <div id="_chart_04_legend"></div>
           </div>
         </div>
-      </div>
-    </>
-  )
+        </div>
+    </Container>  
+  );
+};
 
-}
-
-export default Risk
+export default Risk;

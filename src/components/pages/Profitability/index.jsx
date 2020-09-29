@@ -5,25 +5,28 @@ import { generate_bar_y_chart } from '../../app/bar_y_chart.js';
 import { generate_table } from '../../app/table_rentabilidade_mes.js';
 import './index.css';
 import '../styles.css';
+import { Container } from "@material-ui/core";
 
-const Profitability = () => {
+
+export  const Profitability = () => {
     useEffect(() => {
+
     const line = document.querySelector(".line");
-    generate_line_chart("line");
+    generate_line_chart(line);
+     
+    const bar = document.querySelector(".bar");
+    generate_bar_m_chart(bar);
 
-    const barrinha = document.querySelector(".barrinha");
-    generate_bar_m_chart("barrinha");
-    const barra = document.querySelector(".barra");
-    generate_bar_y_chart("barra");
+    const bar_y = document.querySelector(".bar_y");
+    generate_bar_y_chart(bar_y);
 
-    const rentabilidade = document.querySelector(".rentabilidade");
-    generate_table("rentabilidade");
+    const atual = document.querySelector(".atual");
+    generate_table(atual);
+
   });
 
   return (
-    <>
-      <div>
-
+    <Container style={{ paddingTop: "96px" }}>
         <div className="container">
 
           <div id="draw-area-01" className="draw-container col-12 col-sm-12">
@@ -37,27 +40,25 @@ const Profitability = () => {
             <header>
               <span>Rentabilidade x Meta Atuarial ( % Mensal )</span>
             </header>
-            <div className="barrinha"></div>
+            <div className="bar"></div>
           </div>
 
           <div id="draw-area-03" className="draw-container col-6 col-sm-12">
             <header>
               <span>Rentabilidade x Meta Atuarial ( % )</span>
             </header>
-            <div className="barra"></div>
+            <div className="bar_y"></div>
           </div>
 
           <div id="draw-area-04" className="draw-container col-6 col-sm-12">
             <header>
               <span>Rentabilidade x Meta Atuarial ( % Ano )</span>
-              <div className="rentabilidade"></div>
             </header>
+            <div className="atual"></div>
           </div>
-
         </div>
-      </div>
-    </>
-  )
-}
+    </Container>
+  );
+};
 
 export default Profitability;

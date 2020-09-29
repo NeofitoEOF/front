@@ -6,13 +6,14 @@ import { generate_evolution_bar_chart } from "../../app/barchart_evolucao_patrim
 import "./index.css";
 import { Container } from "@material-ui/core";
 
-export const Dashboard = () => {
+ export const Dashboard = () => {
   useEffect(() => {
     const line = document.querySelector(".line");
     generate_line_chart(line);
 
     const patrimonio = document.querySelector(".patrimonio");
     generate_pie_chart(patrimonio);
+    
     const bar = document.querySelector(".bar");
     generate_evolution_bar_chart(bar);
 

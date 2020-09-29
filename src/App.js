@@ -10,7 +10,8 @@ import {
 import { Navigator } from "./components/layout"
 import { DataContextProvider } from "./components/context/ContextProvider"
 import { Login } from "./components/screens/Login"
-import { Dashboard } from "./components/pages";
+import { Dashboard, Patrimony,Profitability, Risk  } from "./components/pages";
+
 
 function App() {
   const login = localStorage.getItem("login");
@@ -26,6 +27,9 @@ function App() {
         <DataContextProvider>
           <Switch>
             <Route exact path={"/"} component={Dashboard} />
+            <Route exact path={"/Rentabilidade"} component={Profitability} />
+            <Route exact path={"/Patrimonio"} component={Patrimony} />
+            <Route exact path={"/Risco"} component={Risk} />
             <Route exact path={"/ativo/cadastrar"} component={CadastrarAtivo} />
             <Route exact path={"/cliente/cadastrar"} component={CadastroCliente} />
             <Route exact path={"/deposito/cadastrar"} component={CadastrarDeposito} />
