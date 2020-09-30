@@ -11,7 +11,7 @@ import { Navigator } from "./components/layout"
 import { DataContextProvider } from "./components/context/ContextProvider"
 import { Login } from "./components/screens/Login"
 import { Dashboard, Patrimony,Profitability, Risk  } from "./components/pages";
-
+import {Navigation} from "./components/layout/Navigation";
 
 function App() {
   const login = localStorage.getItem("login");
@@ -23,9 +23,11 @@ function App() {
   return (
     <>
       <Router>
+        <Navigation />
         <Navigator />
         <DataContextProvider>
           <Switch>
+            
             <Route exact path={"/"} component={Dashboard} />
             <Route exact path={"/Rentabilidade"} component={Profitability} />
             <Route exact path={"/Patrimonio"} component={Patrimony} />

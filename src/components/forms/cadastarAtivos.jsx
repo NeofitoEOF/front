@@ -4,6 +4,7 @@ import { Button, Container, TextField, MenuItem } from "@material-ui/core";
 import * as axios from "axios";
 import { ReactHookFormSelect } from "../widgets/Select";
 
+
 const AITVO_TIPOS = [
   { value: "titulo_publico", label: "Titulos Públicos" },
   { value: "renda_fixa", label: "Fundo Renda Fixa DI" },
