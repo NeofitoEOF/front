@@ -8,7 +8,6 @@ function build_bar_chart(svg, data) {
 
   const keys = Object.keys(data[0]).slice(1);
   const color = d3.scaleOrdinal().range([ "orange", "gray" ]);
-  const formatDate = d3.timeFormat("%m/%Y");
 
   // definindo eixo x
   const x0 = d3

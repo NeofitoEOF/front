@@ -55,7 +55,7 @@ function callout(g, value) {
         .text((d) => d)
     );
 
-  const { x, y, width: w, height: h } = text.node().getBBox();
+  const { y, width: w, height: h } = text.node().getBBox();
 
   text.attr("transform", `translate(${ -w / 2 },${ 15 - y })`);
   path.attr(
@@ -196,13 +196,13 @@ function build_line_chart(svg, data) {
     );
 
   // Add a clipPath: everything out of this area won't be drawn.
-  const clip = svg.append("defs").append("svg:clipPath")
-    .attr("id", `clip-${ graph_id }`)
-    .append("svg:rect")
-    .attr("width", svg_linechart_width - margin.left - margin.right)
-    .attr("height", svg_linechart_height - margin.top - margin.bottom)
-    .attr("x", margin.left)
-    .attr("y", margin.top);
+  // const clip = svg.append("defs").append("svg:clipPath")
+  //   .attr("id", `clip-${ graph_id }`)
+  //   .append("svg:rect")
+  //   .attr("width", svg_linechart_width - margin.left - margin.right)
+  //   .attr("height", svg_linechart_height - margin.top - margin.bottom)
+  //   .attr("x", margin.left)
+  //   .attr("y", margin.top);
 
   svg
     .append("g")
